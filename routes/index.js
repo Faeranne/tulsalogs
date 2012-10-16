@@ -4,7 +4,7 @@ var server = new mongodb.Server('ds031617.mongolab.com',31617, {});
 var db = new mongodb.Db('tulsabot', server, {});
 exports.start = function(){
 db.open(function(err,res){  
-  db.authenticate('tulsabot',process.env.PASS,function(err,res){
+  db.authenticate('tulsalogs',process.env.PASS,function(err,res){
   });
 });
 }
@@ -24,7 +24,9 @@ exports.logs = function(req, res){
   loc.count(function(err,num){count=num;
   res.writeHead(200, {'Content-Type':'text'});
   res.write('post count:'+count+'\n');
+  console.log(num);
     loc.toArray(function(err,obj){
+    console.log(obj);
     for(var x=0;x<count;x++){  
       var from=obj[x].from;
       var time=obj[x].time;
